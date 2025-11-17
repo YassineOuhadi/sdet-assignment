@@ -4,8 +4,8 @@ This document provides an overview of the FX Deals Import Service implementation
 
 ## 📨 Get in Touch
 
-* 📱 **GitHub Codespace**
-* 📊 **HTML Report (GitHub Pages)**
+* 📱 **GitHub Codespace** [Open in Codespace](https://github.com/codespaces/new?repo=YassineOuhadi/sdet-assignment)
+* 📊 **HTML Report (GitHub Pages)** [View Reports](https://yassineouhadi.github.io/sdet-assignment/)
 
 ## Overview
 
