@@ -90,14 +90,19 @@ integration-test:
 # -----------------------------
 k6-load-test:
   stage: k6
-  image: grafana/k6:latest
+  image:
+    name: grafana/k6:latest
+    entrypoint: ["/bin/sh", "-c"]
+  before_script:
+    - mkdir -p $CI_PROJECT_DIR/k6-scripts
+    - cp -r k6/* $CI_PROJECT_DIR/k6-scripts/
   script:
-    - k6 run k6/erf_concurrent_imports.js
-    - k6 run k6/perf_api_stress.js
-    - k6 run k6/perf_large_file.js
+    - k6 run $CI_PROJECT_DIR/k6-scripts/erf_concurrent_imports.js
+    - k6 run $CI_PROJECT_DIR/k6-scripts/perf_api_stress.js
+    - k6 run $CI_PROJECT_DIR/k6-scripts/perf_large_file.js
+  allow_failure: true
   dependencies:
     - build
-  allow_failure: true
 
 # -----------------------------
 # Publish HTML reports to GitLab Pages
@@ -107,9 +112,10 @@ pages:
   image: alpine:latest
   script:
     - mkdir public
-    - cp -r target/site/jacoco/* public/
+    - mkdir -p public/jacoco
     - mkdir -p public/unit
     - mkdir -p public/integration
+    - cp -r target/site/jacoco/* public/jacoco/
     - cp -r target/surefire-report/unit/* public/unit/
     - cp -r target/surefire-report/integration/* public/integration/
     - cp report/index.html public/index.html
