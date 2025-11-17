@@ -1,0 +1,118 @@
+2025-11-15 13:55:46 INFO  [dealId= rowNum=] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-11-15 13:55:46 INFO  [dealId= rowNum=] com.example.deals.Application - Starting Application v0.0.1-SNAPSHOT using Java 17.0.17 with PID 7 (/app/app.jar started by root in /app)
+2025-11-15 13:55:46 INFO  [dealId= rowNum=] com.example.deals.Application - No active profile set, falling back to 1 default profile: "default"
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@317890ea
+2025-11-15 13:55:47 INFO  [dealId= rowNum=] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-11-15 13:55:48 INFO  [dealId= rowNum=] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-11-15 13:55:48 INFO  [dealId= rowNum=] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-11-15 13:55:48 INFO  [dealId= rowNum=] o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-11-15 13:55:48 INFO  [dealId= rowNum=] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-11-15 13:55:49 WARN  [dealId= rowNum=] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-11-15 13:55:49 INFO  [dealId= rowNum=] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-15 13:55:49 INFO  [dealId= rowNum=] com.example.deals.Application - Started Application in 3.137 seconds (process running for 3.452)
+2025-11-15 13:55:57 INFO  [dealId= rowNum=] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-15 13:55:57 ERROR [dealId=D10007 rowNum=8] com.example.deals.parser.DealParser - Validation error: ToCurrency must be 3-letter ISO
+2025-11-15 13:55:57 ERROR [dealId=D10008 rowNum=9] com.example.deals.parser.DealParser - Validation error: FromCurrency must be 3-letter ISO
+2025-11-15 13:55:57 ERROR [dealId=D10009 rowNum=10] com.example.deals.parser.DealParser - Validation error: Timestamp is required
+2025-11-15 13:55:57 ERROR [dealId=D10010 rowNum=11] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: 
+2025-11-15 13:55:57 ERROR [dealId=D10011 rowNum=12] com.example.deals.parser.DealParser - Validation error: FromCurrency must be 3-letter ISO
+2025-11-15 13:55:57 ERROR [dealId=D10012 rowNum=13] com.example.deals.parser.DealParser - Validation error: ToCurrency must be 3-letter ISO
+2025-11-15 13:55:57 ERROR [dealId=D10013 rowNum=14] com.example.deals.parser.DealParser - Timestamp parse error: Invalid ISO timestamp: 2025-14-11T11:00:00Z
+2025-11-15 13:55:57 ERROR [dealId=D10014 rowNum=15] com.example.deals.parser.DealParser - Validation error: Amount must be positive
+2025-11-15 13:55:57 ERROR [dealId=D10015 rowNum=16] com.example.deals.parser.DealParser - Validation error: Amount must be positive
+2025-11-15 13:55:57 ERROR [dealId=D10016 rowNum=17] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: abc
+2025-11-15 13:55:57 ERROR [dealId=D10021 rowNum=22] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: 2025-11-14T11:40:00Z
+2025-11-15 13:55:57 INFO  [dealId=D10001 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10002 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10003 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10004 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10005 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10006 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10017 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10018 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10019 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10020 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10022 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10023 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10024 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10025 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10026 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10027 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10028 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10029 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10030 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10031 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10032 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10033 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10034 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10035 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10036 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10037 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10038 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10039 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10040 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10041 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10042 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10043 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10044 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10045 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10046 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10047 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10048 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10049 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10050 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:56:45 ERROR [dealId=D10007 rowNum=8] com.example.deals.parser.DealParser - Validation error: ToCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10008 rowNum=9] com.example.deals.parser.DealParser - Validation error: FromCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10009 rowNum=10] com.example.deals.parser.DealParser - Validation error: Timestamp is required
+2025-11-15 13:56:45 ERROR [dealId=D10010 rowNum=11] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: 
+2025-11-15 13:56:45 ERROR [dealId=D10011 rowNum=12] com.example.deals.parser.DealParser - Validation error: FromCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10012 rowNum=13] com.example.deals.parser.DealParser - Validation error: ToCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10013 rowNum=14] com.example.deals.parser.DealParser - Timestamp parse error: Invalid ISO timestamp: 2025-14-11T11:00:00Z
+2025-11-15 13:56:45 ERROR [dealId=D10014 rowNum=15] com.example.deals.parser.DealParser - Validation error: Amount must be positive
+2025-11-15 13:56:45 ERROR [dealId=D10015 rowNum=16] com.example.deals.parser.DealParser - Validation error: Amount must be positive
+2025-11-15 13:56:45 ERROR [dealId=D10016 rowNum=17] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: abc
+2025-11-15 13:56:45 ERROR [dealId=D10021 rowNum=22] com.example.deals.parser.DealParser - CSV parse error: Amount must be a number: 2025-11-14T11:40:00Z
+2025-11-15 13:56:45 WARN  [dealId=D10001 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10002 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10003 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10004 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10005 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10006 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10017 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10018 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10019 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10020 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10022 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10023 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10024 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10025 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10026 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10027 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10028 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10029 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10030 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10031 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10032 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10033 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10034 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10035 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10036 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10037 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10038 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10039 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10040 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10041 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10042 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10043 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10044 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10045 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10046 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10047 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10048 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10049 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+2025-11-15 13:56:45 WARN  [dealId=D10050 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping

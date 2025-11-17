@@ -1,0 +1,120 @@
+stages:
+  - build
+  - test
+  - integration
+  - coverage
+  - k6
+  - pages
+
+# -----------------------------
+# Variables globales
+# -----------------------------
+variables:
+  MAVEN_CLI_OPTS: "-B -V"
+  POSTGRES_DB: dealsdb
+  POSTGRES_USER: deals
+  POSTGRES_PASSWORD: password
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/dealsdb
+  SPRING_DATASOURCE_USERNAME: deals
+  SPRING_DATASOURCE_PASSWORD: password
+
+# -----------------------------
+# Build the Spring Boot app
+# -----------------------------
+build:
+  stage: build
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - mvn $MAVEN_CLI_OPTS clean package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+
+# -----------------------------
+# Run unit tests
+# -----------------------------
+unit-test:
+  stage: test
+  image: maven:3.9.6-eclipse-temurin-17
+  script:
+    - mvn $MAVEN_CLI_OPTS test
+  artifacts:
+    paths:
+      - target/surefire-reports
+      - target/surefire-report/unit
+      - target/site/jacoco
+      - logs/
+  allow_failure: false
+
+# -----------------------------
+# Run integration tests
+# -----------------------------
+integration-test:
+  stage: integration
+  image: docker:27.0.3-cli
+  services:
+    - name: docker:27.0.3-dind
+      alias: docker
+      command: ["--tls=false"]
+  variables:
+    DOCKER_HOST: "tcp://docker:2375"
+    DOCKER_TLS_CERTDIR: ""
+    TESTCONTAINERS_RYUK_DISABLED: "true"
+  script:
+    - apk add --no-cache maven openjdk17
+    - mvn $MAVEN_CLI_OPTS verify -P integration
+  artifacts:
+    paths:
+      - target/failsafe-reports
+      - target/surefire-report/integration
+      - logs/
+  dependencies:
+    - build
+
+# -----------------------------
+# Generate coverage report
+# -----------------------------
+#coverage:
+#  stage: coverage
+#  image: maven:3.9.6-eclipse-temurin-17
+#  script:
+#    - mvn $MAVEN_CLI_OPTS verify jacoco:report
+#  artifacts:
+#    paths:
+#      - target/site/jacoco
+#      - target/surefire-report
+#    expire_in: 1 week
+
+# -----------------------------
+# Run K6 load tests
+# -----------------------------
+k6-load-test:
+  stage: k6
+  image: loadimpact/k6:latest
+  script:
+    - k6 run k6/erf_concurrent_imports.js
+    - k6 run k6/perf_api_stress.js
+    - k6 run k6/perf_large_file.js
+  dependencies:
+    - build
+  allow_failure: true
+
+# -----------------------------
+# Publish HTML reports to GitLab Pages
+# -----------------------------
+pages:
+  stage: pages
+  image: alpine:latest
+  script:
+    - mkdir public
+    - cp -r target/site/jacoco/* public/
+    - mkdir -p public/unit
+    - mkdir -p public/integration
+    - cp -r target/surefire-report/unit/* public/unit/
+    - cp -r target/surefire-report/integration/* public/integration/
+    - cp public/index.html public/index.html
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

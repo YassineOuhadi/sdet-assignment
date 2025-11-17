@@ -1,0 +1,41 @@
+FROM maven:3.9.6-eclipse-temurin-17
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y \
+        make \
+        git \
+        curl \
+        vim \
+        unzip \
+        bash-completion \
+        gnupg \
+        software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.0.3.tgz -o docker-cli.tgz && \
+    tar -xzf docker-cli.tgz && \
+    mv docker/* /usr/bin/ && \
+    rm -rf docker docker-cli.tgz
+
+RUN curl -L "https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-linux-x86_64" \
+    -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
+
+RUN curl -s https://dl.k6.io/key.gpg | gpg --dearmor | tee /usr/share/keyrings/k6-archive-keyring.gpg >/dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list && \
+    apt-get update && \
+    apt-get install -y k6 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN useradd -ms /bin/bash dev
+
+RUN groupadd -g 981 docker || true && \
+    usermod -aG docker dev
+
+USER dev
+
+WORKDIR /workspace
+
+CMD ["bash"]

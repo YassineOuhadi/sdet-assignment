@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS deals (
+  id BIGSERIAL PRIMARY KEY,
+  deal_id VARCHAR NOT NULL UNIQUE,
+  from_currency VARCHAR(3) NOT NULL,
+  to_currency VARCHAR(3) NOT NULL,
+  deal_timestamp TIMESTAMP NOT NULL,
+  amount NUMERIC(19,2) NOT NULL
+);

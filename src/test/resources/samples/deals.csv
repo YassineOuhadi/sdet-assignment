@@ -1,0 +1,4 @@
+dealUniqueId,fromCurrency,toCurrency,dealTimestamp,amount
+D1,USD,EUR,2025-11-14T10:00:00Z,1000
+D2,GBP,USD,2025-11-14T11:00:00Z,500.50
+D3,EUR,JPY,2025-11-14T12:00:00Z,750

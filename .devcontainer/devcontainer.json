@@ -1,0 +1,18 @@
+{
+  "name": "FX Deals Dev Container",
+  "dockerComposeFile": "../docker-compose.dev.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "dev",
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "redhat.vscode-yaml",
+    "pivotal.vscode-spring-boot",
+    "ms-azuretools.vscode-docker",
+    "ritwickdey.LiveServer",
+    "lfm.vscode-makefile-term",
+    "postman.postman-for-vscode"
+  ],
+  "forwardPorts": [5500],
+  "postStartCommand": "docker-compose -f docker-compose.yml up -d --build && echo 'Devcontainer and dependencies are up'"
+}

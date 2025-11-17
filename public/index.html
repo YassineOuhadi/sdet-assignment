@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDET Assignment – Project Curriculum</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+          @apply bg-gray-50 text-gray-800 font-sans;
+        }
+        h1, h2, h3 {
+          @apply font-bold;
+        }
+        /* Section headers */
+        .section-title {
+          @apply text-2xl md:text-3xl font-bold border-l-4 border-indigo-600 pl-3 mb-6 flex items-center gap-2;
+        }
+        /* Modern badge */
+        .badge {
+          @apply px-4 py-1 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-700 shadow;
+        }
+        /* Feature card */
+        .feature-card {
+          @apply bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col gap-3 border-l-4 border-indigo-500;
+        }
+        /* Report card */
+        .report-card {
+          @apply bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col items-center justify-center gap-3;
+        }
+        /* Table styles */
+        table th, table td {
+          @apply border px-4 py-2;
+        }
+        table th {
+          @apply bg-gray-100 font-semibold;
+        }
+    </style>
+</head>
+<body>
+
+<header class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 md:mb-0">SDET Assignment – Project Curriculum</h1>
+        <div class="flex flex-wrap gap-3">
+            <a href="https://github.com/yassinouhadi/sdet-assignment" target="_blank"
+               class="px-4 py-2 bg-white text-gray-800 border border-gray-300 rounded-lg shadow hover:bg-gray-100 font-semibold transition">
+                GitHub Repo
+            </a>
+            <a href="https://github.com/codespaces/new" target="_blank"
+               class="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 font-bold transition">
+                Codespace Live
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto px-6 py-12 space-y-16">
+
+    <section>
+        <h2 class="section-title">Project Overview</h2>
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl">
+            Complete SDET-level workflow for Bloomberg FX deals, demonstrating CSV parsing, schema-driven validation, deduplication, partial saves, proper logging, and robust exception handling. Built with Spring Boot, Maven, Docker, and modern testing tools like JUnit, Mockito, RestAssured, and TestContainers.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="grid gap-3 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+            <span class="badge">Java 17</span>
+            <span class="badge">Spring Boot</span>
+            <span class="badge">JaCoCo</span>
+            <span class="badge">JUnit</span>
+            <span class="badge">Mockito</span>
+            <span class="badge">AssertJ</span>
+            <span class="badge">Surefire</span>
+            <span class="badge">Failsafe</span>
+            <span class="badge">OpenCSV</span>
+            <span class="badge">SLF4J / Logback</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Makefile</span>
+            <span class="badge">Postman</span>
+            <span class="badge">K6</span>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Key Features / Flow</h2>
+        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">CSV Parsing & Validation</h3>
+                <p class="text-gray-600">Automatic parsing and schema-driven validation for CSV files.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Deduplication Logic</h3>
+                <p class="text-gray-600">Prevents duplicate entries and ensures data integrity.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Partial Save (No Rollback)</h3>
+                <p class="text-gray-600">Saves valid rows even if some fail validation, ensuring partial data persistence.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Logging & Exception Handling</h3>
+                <p class="text-gray-600">Structured logging with SLF4J and comprehensive exception handling.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Persistence & Concurrency</h3>
+                <p class="text-gray-600">Supports multi-threaded processing and database transactions consistently.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Clean Architecture</h3>
+                <p class="text-gray-600">Controller, Parser, Validator, and Service layers for maintainable code.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Unit Tests</h3>
+                <p class="text-gray-600">JUnit & Mockito for verifying individual components in isolation.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Integration Tests</h3>
+                <p class="text-gray-600">Full system tests with TestContainers, RestAssured, WebMvc, and JUnit.</p>
+            </div>
+            <div class="feature-card">
+                <h3 class="text-lg font-semibold">Reporting & Coverage</h3>
+                <p class="text-gray-600">Unit & integration reports generated with Surefire, Failsafe, and JaCoCo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Reports & Live Testing</h2>
+        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <a href="https://sdet-assignment-11a638.gitlab.io/" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/jacoco.svg" class="w-10 h-10" alt="JaCoCo Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Coverage Report</span>
+            </a>
+            <a href="https://gitlab.com/yassinouhadi/sdet-assignment/-/pipelines" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gitlab.svg" class="w-10 h-10" alt="GitLab Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">GitLab CI Jobs</span>
+            </a>
+            <a href="https://sdet-assignment-11a638.gitlab.io/unit-report/" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/junit5.svg" class="w-10 h-10" alt="JUnit Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Unit Test Report</span>
+            </a>
+            <a href="https://sdet-assignment-11a638.gitlab.io/integration-report/" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/testcontainers.svg" class="w-10 h-10" alt="TestContainers Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Integration Test Report</span>
+            </a>
+            <a href="" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/postman.svg" class="w-10 h-10" alt="Postman Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Postman Collection</span>
+            </a>
+            <a href="#" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/k6.svg" class="w-10 h-10" alt="K6 Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">K6 Load Test</span>
+            </a>
+            <a href="#" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/markdown.svg" class="w-10 h-10" alt="Markdown Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Documentation</span>
+            </a>
+            <a href="https://github.com/codespaces/new" target="_blank" class="report-card">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" class="w-10 h-10" alt="GitHub Logo">
+                <span class="font-semibold mt-2 text-gray-800 text-center">Codespace Live</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-white shadow-inner mt-16">
+    <div class="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
+        © 2025 Yassine Ouhadi
+    </div>
+</footer>
+
+</body>
+</html>

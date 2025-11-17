@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {"name": "dealUniqueId", "type": "string"},
+    {"name": "fromCurrency", "type": "string", "constraints": {"length": 3}},
+    {"name": "toCurrency", "type": "string", "constraints": {"length": 3}},
+    {"name": "dealTimestamp", "type": "datetime", "format": "iso8601"},
+    {"name": "amount", "type": "number", "constraints": {"minimum": 0}}
+  ]
+}

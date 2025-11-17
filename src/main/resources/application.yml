@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/dealsdb}
+    username: ${SPRING_DATASOURCE_USERNAME:deals}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  sql:
+      init:
+        mode: always
+server:
+  port: 8080
+
+logging:
+  level:
+    com.example.deals: INFO
+    org.springframework: WARN
+  file:
+    name: logs/deals-app.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"

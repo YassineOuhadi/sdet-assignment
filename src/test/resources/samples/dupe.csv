@@ -1,0 +1,3 @@
+dealUniqueId,fromCurrency,toCurrency,dealTimestamp,amount
+DUP1,USD,EUR,2025-11-14T10:00:00Z,100.00
+DUP1,USD,EUR,2025-11-14T10:00:00Z,100.00

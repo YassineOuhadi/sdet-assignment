@@ -1,0 +1,21 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile.dev
+    volumes:
+      - .:/workspace
+#      - ./logs:/app/logs
+      - app_logs:/workspace/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - deals-network
+    stdin_open: true
+    tty: true
+
+volumes:
+  app_logs:
+
+networks:
+  deals-network:
+    driver: bridge

@@ -1,0 +1,229 @@
+{
+  "info": {
+    "name": "FX Deals API",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "description": "Collection to test FX Deals API: import, health check, duplicates, invalid CSV, large files",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Response contains ok\", () => pm.expect(pm.response.text()).to.include(\"ok\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deal Import",
+      "item": [
+        {
+          "name": "POST /deals/import - valid CSV",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/workspace/fixtures/sample1.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}//import",
+              "host": ["{{baseUrl}}"],
+              "path": ["import"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Response has results\", () => pm.expect(pm.response.text()).to.include(\"results\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /deals/import - invalid CSV",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/workspace/fixtures/invalid.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}//import",
+              "host": ["{{baseUrl}}"],
+              "path": ["import"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Error message contains invalid\", () => pm.expect(pm.response.json().error).to.include(\"invalid\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /deals/import - missing file",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [] },
+            "url": {
+              "raw": "{{baseUrl}}//import",
+              "host": ["{{baseUrl}}"],
+              "path": ["import"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"Error message is CSV file required\", () => pm.expect(pm.response.json().error).to.include(\"CSV file is required\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /deals/import - duplicate deals",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/workspace/fixtures/duplicates.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}//import",
+              "host": ["{{baseUrl}}"],
+              "path": ["import"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Duplicates reported\", () => pm.expect(pm.response.text()).to.include(\"DUPLICATE\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /deals/import - large file",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/workspace/fixtures/large.csv"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}//import",
+              "host": ["{{baseUrl}}"],
+              "path": ["import"]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"All rows processed\", () => pm.expect(pm.response.json().processedRows).to.eql(pm.response.json().totalRows));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Query Deals",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}",
+          "host": ["{{baseUrl}}"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Response is array\", () => pm.expect(pm.response.json()).to.be.an('array'));"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://deals-app:8080/api/v1/deals"
+    }
+  ]
+}
