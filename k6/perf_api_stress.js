@@ -2,9 +2,9 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 const endpoints = [
-    { url: 'http://deals-app:8080/api/v1/deals', name: 'list_deals' },
-    { url: 'http://deals-app:8080/api/v1/deals/D0001', name: 'get_deal' },
-    { url: 'http://deals-app:8080/api/v1/deals/health', name: 'health' },
+    { url: 'http://localhost:8080/api/v1/deals', name: 'list_deals' },
+    { url: 'http://localhost:8080/api/v1/deals/D0001', name: 'get_deal' },
+    { url: 'http://localhost:8080/api/v1/deals/health', name: 'health' },
 ];
 
 export const options = {

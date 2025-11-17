@@ -8,7 +8,8 @@
         import postman
 
 DB_CONTAINER_NAME=fxdeals_postgres
-BASE_URL=http://deals-app:8080/api/v1/deals
+#BASE_URL=http://deals-app:8080/api/v1/deals
+BASE_URL=http://localhost:8080/api/v1/deals
 
 # ========================
 # Target to run all steps
@@ -45,6 +46,7 @@ clean:
 
 # ========================
 # Prepare environment for tests
+# Not for local runs, juste for dev container
 # ========================
 prepare:
 	@printf "Connecting devcontainer and deals-app to 'deals-network'...\n"

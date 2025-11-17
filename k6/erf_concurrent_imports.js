@@ -31,7 +31,7 @@ export default function () {
         file: http.file(csvData, filename, 'text/csv'),
     };
 
-    const res = http.post('http://deals-app:8080/api/v1/deals/import', payload, {
+    const res = http.post('http://localhost:8080/api/v1/deals/import', payload, {
     });
 
     check(res, {

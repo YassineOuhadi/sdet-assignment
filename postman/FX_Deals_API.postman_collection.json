@@ -223,7 +223,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://deals-app:8080/api/v1/deals"
+      "value": "http://localhost:8080/api/v1/deals"
     }
   ]
 }

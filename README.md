@@ -1,47 +1,21 @@
 # FX Deals Import Service
 
-This document provides an overview of the FX Deals Import Service implementation, including architecture, validation, deduplication logic, testing strategy, performance testing, Docker deployment, and Makefile usage.
-
-## 📨 Get in Touch
-
-* 📱 **GitHub Codespace** [Open in Codespace](https://github.com/codespaces/new?repo=YassineOuhadi/sdet-assignment)
-* 📊 **HTML Report (GitHub Pages)** [View Reports](https://yassineouhadi.github.io/sdet-assignment/)
-
-## Overview
-
-The service accepts CSV files containing FX deal information and persists valid rows into a PostgreSQL database. It supports:
+This project implements an FX Deals Import Service that accepts CSV files containing FX deal information and persists valid rows into a PostgreSQL database. It supports:
 
 * Row-level validation
 * Deduplication (no deal is imported twice)
-* Partial success with no rollback
-* Parsing, validation, persistence workflow
+* Partial success without rollback
+* Parsing, validation, and persistence workflow
 * REST API endpoints for import and retrieval
 
-## GitHub Codespace Environment
+---
 
-The GitHub Codespace for this project is fully prepared using a **Dev Container** configuration. It includes:
+## 📨 Get in Touch
 
-* Preinstalled **Makefile tools**, allowing test commands to be executed directly from the Makefile.
-* The **Postman extension**, enabling execution of the full Postman collection inside the Codespace without leaving the editor.
-* All required **Docker images** (PostgreSQL + Deals REST API) running inside the Codespace.
-* A full **Maven-based test environment**, so API tests and integration tests run seamlessly.
+* **GitHub Codespace** [Open in Codespace](https://github.com/codespaces/new?repo=YassineOuhadi/sdet-assignment)
+* **HTML Report (GitHub Pages)** [View Reports](https://yassinouhadi.gitlab.io/sdet-assignment/)
 
-Before using the Codespace, run:
-
-```sh
-make prepare
-```
-
-Once prepared, tests and reports can be executed directly:
-
-```sh
-make import
-make test
-make coverage
-make serve-unit-report   # then press Alt+L → Alt+O to open in browser
-```
-
-The Codespace is therefore **ready out-of-the-box** to run imports, execute tests, generate coverage, and serve test reports.
+---
 
 ## Features
 
@@ -49,11 +23,11 @@ The Codespace is therefore **ready out-of-the-box** to run imports, execute test
 
 Each row contains:
 
-* **Deal ID** (unique)
-* **From Currency** (ISO3)
-* **To Currency** (ISO3)
-* **Timestamp** (ISO-8601)
-* **Amount** (BigDecimal)
+* Deal ID (unique)
+* From Currency (ISO3)
+* To Currency (ISO3)
+* Timestamp (ISO-8601)
+* Amount (BigDecimal)
 
 ### ✅ Validation
 
@@ -66,76 +40,102 @@ Each row contains:
 
 ### ✅ Deduplication
 
-* Duplicate Deal IDs inside the **same file** are skipped
+* Duplicate Deal IDs inside the same file are skipped
 * Duplicate Deal IDs already in DB are not imported
-* System ensures **idempotent imports**
+* System ensures idempotent imports
 
 ### ✅ Partial Success
 
-* No rollback allowed
 * Each valid row is inserted independently
 * Errors are reported per row in `RowResult`
+* No rollback is performed
+
+### ✅ Logging & Error Handling
+
+All parsing, validation, and persistence steps are logged with proper exceptions. Logs are written to `/logs/deals-app.log`. Example:
+
+```
+2025-11-15 13:55:57 INFO  [dealId=D10049 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:55:57 INFO  [dealId=D10050 rowNum=] c.e.deals.service.DealImportService - Imported successfully
+2025-11-15 13:56:45 ERROR [dealId=D10007 rowNum=8] com.example.deals.parser.DealParser - Validation error: ToCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10008 rowNum=9] com.example.deals.parser.DealParser - Validation error: FromCurrency must be 3-letter ISO
+2025-11-15 13:56:45 ERROR [dealId=D10009 rowNum=10] com.example.deals.parser.DealParser - Validation error: Timestamp is required
+2025-11-15 13:56:45 WARN  [dealId=D10001 rowNum=] c.e.deals.service.DealImportService - Duplicate deal in DB, skipping
+```
+
+---
 
 ## Architecture
 
-```
-Controller → Parser → Service → Validator → Persistence
-```
+`Controller → Parser → Service → Validator → Persistence`
 
-### Components
+Components:
 
-* **DealController** -- REST endpoints and file handling
-* **DealParser** -- CSV parsing using OpenCSV
-* **DealImportService** -- Main business logic
-* **DealValidator** -- Field validation rules
-* **DealRepository** -- JPA repository for persistence
-* **GlobalExceptionHandler** -- Error handling with MDC
-* **Deal** -- JPA Entity
+* `DealController` – REST endpoints and file handling
+* `DealParser` – CSV parsing using OpenCSV
+* `DealImportService` – Main business logic
+* `DealValidator` – Field validation rules
+* `DealRepository` – JPA repository for persistence
+* `GlobalExceptionHandler` – Error handling with MDC
+* `Deal` – JPA Entity
+
+---
 
 ## API Endpoints
 
-### Import Deals
+| Endpoint                 | Method | Description       |
+| ------------------------ | ------ | ----------------- |
+| `/api/v1/deals/import`   | POST   | Import CSV file   |
+| `/api/v1/deals`          | GET    | Get all deals     |
+| `/api/v1/deals/{dealId}` | GET    | Get a single deal |
+| `/api/v1/deals/health`   | GET    | Health check      |
+
+---
+
+## Running With Dev Container
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/YassineOuhadi/sdet-assignment.git
+   cd sdet-assignment
+   ```
+2. Install the **Dev Container** extension in VS Code.
+3. Open the project in VS Code.
+4. Press **Ctrl+Shift+P → “Remote-Containers: Open Folder in Container”**.
+
+**Important:** Update the base URL in K6 scripts and Postman collections:
 
 ```
-POST /api/v1/deals/import
-Content-Type: multipart/form-data
-file=@deals.csv
+http://localhost:8080/api/v1/deals → http://deals-app:8080/api/v1/deals
 ```
 
-### Get All Deals
+Run tests and imports:
 
-```
-GET /api/v1/deals
-```
-
-### Get Single Deal
-
-```
-GET /api/v1/deals/{dealId}
-```
-
-### Health Check
-
-```
-GET /api/v1/deals/health
+```bash
+make prepare
+make import
+make test
+make coverage
+make serve-unit-report
+make k6-all
 ```
 
-## Running with Docker Compose
+---
 
-```sh
+## Running With Docker Compose
+
+```bash
 make up
-```
-
-Services started:
-
-* PostgreSQL
-* Spring Boot application
-
-To stop:
-
-```sh
+make import
+make test
+make integration
+make coverage
+make k6-all
 make down
 ```
+
+---
 
 ## Makefile Commands
 
@@ -150,70 +150,16 @@ make down
 | `make k6-all`   | Run performance tests  |
 | `make import`   | Import sample CSV file |
 
-## Testing Strategy
-
-### ✅ Unit Tests
-
-* Validation logic
-* Parsing logic
-* Deduplication
-* Import flow
-* Error scenarios
-
-### ✅ Integration Tests
-
-* DB boundary behavior
-* Repository tests
-* End-to-end import processing
-
-### ✅ API Tests with RestAssured
-
-Covers:
-
-* Import CSV success
-* Validation errors
-* Duplicate detection
-* Row-level error reporting
-* Partial insert behavior
-
-### ✅ Performance Tests (K6)
-
-* Stress test
-* Concurrent imports
-* Large file imports
-
-Run:
-
-```sh
-make k6-all
-```
-
-## Coverage Requirements
-
-* **100% coverage** for parsing, validation, deduplication, and import flow
-* Checked with **JaCoCo**
-* Build fails if coverage is below target
-
-Report:
-
-```
-target/site/jacoco/index.html
-```
-
-Open:
-
-```sh
-make serve-coverage
-```
+---
 
 ## Postman Collection
-
-A full Postman collection is included:
 
 * Import API tests
 * Get All Deals
 * Get Single Deal
 * Negative scenarios
+
+---
 
 ## Folder Structure
 
@@ -234,18 +180,19 @@ A full Postman collection is included:
 └── README.md
 ```
 
-## How to Reproduce
+---
 
-From a clean checkout:
+## Testing Strategy
 
-```sh
-make clean
-make build
-make up
-make test
-make verify
-make coverage
-make k6-all
-```
+* ✅ Unit Tests: validation, parsing, deduplication, import flow
+* ✅ Integration Tests: DB boundaries, repository, end-to-end import
+* ✅ API Tests (RestAssured): CSV import, validation errors, duplicate detection
+* ✅ Performance Tests (K6): stress test, concurrent imports, large files
 
-Everything is automated and reproducible.
+Coverage is enforced via JaCoCo; build fails if coverage is below target.
+
+---
+
+## License
+
+No license specified.

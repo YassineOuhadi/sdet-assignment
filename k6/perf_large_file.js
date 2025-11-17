@@ -22,7 +22,7 @@ export default function () {
         file: http.file(largeFile, 'large.csv', 'text/csv'),
     };
 
-    const res = http.post('http://deals-app:8080/api/v1/deals/import', payload);
+    const res = http.post('http://localhost:8080/api/v1/deals/import', payload);
 
     check(res, {
         'status is 200': (r) => r.status === 200,
