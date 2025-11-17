@@ -90,7 +90,7 @@ integration-test:
 # -----------------------------
 k6-load-test:
   stage: k6
-  image: loadimpact/k6:latest
+  image: grafana/k6:latest
   script:
     - k6 run k6/erf_concurrent_imports.js
     - k6 run k6/perf_api_stress.js
@@ -112,7 +112,7 @@ pages:
     - mkdir -p public/integration
     - cp -r target/surefire-report/unit/* public/unit/
     - cp -r target/surefire-report/integration/* public/integration/
-    - cp public/index.html public/index.html
+    - cp report/index.html public/index.html
   artifacts:
     paths:
       - public
